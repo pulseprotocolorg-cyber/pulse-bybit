@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pulse-bybit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Bybit adapter for PULSE Protocol — trade with PULSE messages"
 readme = "README.md"
 license = "Apache-2.0"

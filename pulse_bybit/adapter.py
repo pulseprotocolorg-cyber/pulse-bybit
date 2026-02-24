@@ -92,7 +92,8 @@ class BybitAdapter(PulseAdapter):
         self._api_secret = api_secret
         self._testnet = testnet
         self._session: Optional[requests.Session] = None
-        self._recv_window = "5000"
+        self._recv_window = "20000"
+        self._time_offset = 0  # Local vs server time difference in ms
 
     def connect(self) -> None:
         """Initialize HTTP session and verify connectivity."""
@@ -101,6 +102,9 @@ class BybitAdapter(PulseAdapter):
         try:
             resp = self._session.get(f"{self.base_url}{ENDPOINTS['server_time']}", timeout=10)
             resp.raise_for_status()
+            server_time = resp.json().get("result", {}).get("timeSecond", None)
+            if server_time:
+                self._time_offset = int(server_time) * 1000 - int(time.time() * 1000)
             self.connected = True
         except requests.ConnectionError as e:
             raise AdapterConnectionError(f"Cannot reach Bybit API: {e}") from e
@@ -337,7 +341,7 @@ class BybitAdapter(PulseAdapter):
         if not self._api_key or not self._api_secret:
             raise AdapterError("API key and secret required for signed requests.")
 
-        timestamp = str(int(time.time() * 1000))
+        timestamp = str(int(time.time() * 1000) + self._time_offset)
         param_str = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
         sign_str = f"{timestamp}{self._api_key}{self._recv_window}{param_str}"
 
@@ -360,7 +364,7 @@ class BybitAdapter(PulseAdapter):
             raise AdapterError("API key and secret required for signed requests.")
 
         import json
-        timestamp = str(int(time.time() * 1000))
+        timestamp = str(int(time.time() * 1000) + self._time_offset)
         param_str = json.dumps(params)
         sign_str = f"{timestamp}{self._api_key}{self._recv_window}{param_str}"
 
