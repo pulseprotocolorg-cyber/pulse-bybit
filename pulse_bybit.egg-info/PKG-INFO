@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: pulse-bybit
+Version: 0.1.0
+Summary: Bybit adapter for PULSE Protocol — trade with PULSE messages
+Author-email: PULSE Protocol Team <pulse@protocol.org>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/pulseprotocolorg-cyber/pulse-bybit
+Project-URL: Repository, https://github.com/pulseprotocolorg-cyber/pulse-bybit
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pulse-protocol>=0.5.0
+Requires-Dist: requests>=2.28.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
