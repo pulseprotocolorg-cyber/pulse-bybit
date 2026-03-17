@@ -1,5 +1,9 @@
 # PULSE-Bybit
 
+[![PyPI version](https://badge.fury.io/py/pulse-bybit.svg)](https://pypi.org/project/pulse-bybit/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/pulse-bybit.svg)](https://pypi.org/project/pulse-bybit/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+
 **Bybit V5 adapter for PULSE Protocol — trade Bybit with semantic messages.**
 
 Write your trading bot once, run it on any exchange. Same code works with Binance, Kraken, OKX — just change one line.
